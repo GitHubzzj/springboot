@@ -36,7 +36,7 @@ Boot所实现的功能超出了该任务的描述,开发人员不仅不再需要
     
     1) 提供约定的starter POM来简化Maven配置(约定优先于配置)，让Maven的配置变得简单.如:spring-boot-starter-web
     
-4. Actuator：让你能够深入运行中的Spring Boot应用程序，一探Spring Boot程序的内部信息。
+4. [Actuator](https://www.jianshu.com/p/481134c3fab7)：让你能够深入运行中的Spring Boot应用程序，一探Spring Boot程序的内部信息。
      
     1)提供生产就绪型功能，如指标，健康检查和外部配置
      
@@ -47,16 +47,64 @@ Boot所实现的功能超出了该任务的描述,开发人员不仅不再需要
 #### SpringBoot是什么，解决哪些问题
 
      1) Spring Boot使编码变简单
-
+            springboot-quickstart
      2) Spring Boot使配置变简单
-        
+     
+>属性优先级排列：
+>1. 命令行参数
+>2. java:comp/env 里的 JNDI 属性
+>3. JVM 系统属性
+>4. 操作系统环境变量
+>5. RandomValuePropertySource 属性类生成的 random.* 属性
+>6. 应用以外的 application.properties（或 yml）文件
+>7. 打包在应用内的 application.properties（或 yml）文件
+>8. 在应用 @Configuration 配置类中，用 @PropertySource 注解声明的属性文件
+>9. SpringApplication.setDefaultProperties 声明的默认属性
+      
+        见 spring-boot-config
+        springboot-dubbo
+        springboot-es
      3) Spring Boot使部署变简单
-
+        jar + Docker部署  //todo:
      4) Spring Boot使监控变简单
-
-     5) Spring Boot的不足
+         //todo:
 
 #### SpringBoot常用注解
+
+@Condition
+
+组合注解:
+
+@Import原理 //todo:
+
+---
+
+@Enable*注解的工作原理:
+
+@EnableAspectJAutoProxy
+
+@EnableAsync
+
+@EnableScheduling
+- 第一类:直接导入配置类
+    @EnableScheduling -> SchedulingConfiguration -> ScheduledAnnotationBeanPostProcessor
+    
+- 第二类:依据条件选择配置类
+    @EnableAsync -> ProxyAsyncConfiguration -> AsyncAnnotationBeanPostProcessor
+    @Import(AsyncConfigurationSelector.class)
+- 第三类:动态注册Bean
+    @EnableAspectJAutoProxy
+    @Import(AspectJAutoProxyRegistrar.class) -> 实现了 ImportBeanDefinitionRegistrar 接口,作用是:通过重写方法,自动添加Bean到已有的配置类
+
+WebApplicationInitializer ->  web.xml
+
+HTTP长连接 http://ju.outofmemory.cn/entry/28814     //todo:
+
+
+springboot运行原理 颠覆者  //todo:
+@ConditionOnxxx
+springboot工作机制  //todo:
+springboot-starter  //todo:
 
 |注解|	作用|
 |-----------|-----------|
@@ -66,7 +114,10 @@ Boot所实现的功能超出了该任务的描述,开发人员不仅不再需要
 |@EnableAutoConfiguration|让springboot根据类路径中的jar包依赖为当前项目进行自动配置。|
 |@ImportResource|	加载xml配置。<br>例如：@ImportResource({"classpath:some-context.xml","classpath:another-context.xml"})|
 |@ConfigurationProperties|	将properties属性和一个bean及其属性关联。   写在bean里面。<br>例如：@ConfigurationProperties(prefix = "author" , location = "{classpath:config/author.properties}" )|      
-#### SpringBoot源码浅析
+
+#### SpringBoot源码浅析  //todo:
+
+springboot + dubbo  //todo:
      
 #### 推荐学习资源
    《 JavaEE开发的颠覆者 Spring Boot实战 》
