@@ -110,6 +110,16 @@ WebApplicationInitializer ->  web.xml
 HTTP长连接 http://ju.outofmemory.cn/entry/28814     //todo:
 
 
+|注解|	作用|
+|-----------|-----------|
+|@SpringBootApplication|	SpringBoot的核心注解，主要作用是开启自动配置。|
+|@SpringBootApplication|@SpringBootApplication=@ComponentScan+@Configuration+@EnableAutoConfiguration|
+|@SpringBootApplication|关闭特定的自动配置：@SpringBootApplication注解的exclude参数。<br>例如：@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class} )|
+|@EnableAutoConfiguration|让springboot根据类路径中的jar包依赖为当前项目进行自动配置。|
+|@ImportResource|	加载xml配置。<br>例如：@ImportResource({"classpath:some-context.xml","classpath:another-context.xml"})|
+|@ConfigurationProperties|	将properties属性和一个bean及其属性关联。   写在bean里面。<br>例如：@ConfigurationProperties(prefix = "author" , location = "{classpath:config/author.properties}" )|      
+
+
 springboot运行原理 颠覆者  
 包名:
 spring-boot-autoconfigure-xx.RELEASE.jar
@@ -119,8 +129,9 @@ debug=true 观察
     -> getCandidateConfigurations 读取
     -> SpringFactoriesLoader.loadFactoryNames
     ->  FACTORIES_RESOURCE_LOCATION = "META-INF/spring.factories" 该文件里面有类完整名的配置
+HttpEncodingAutoConfiguration
     
-    
+springboot工作机制    
 @ConditionOnxxx
 @ConditionalOnBean：当SpringIoc容器内存在指定Bean的条件
 @ConditionalOnClass：当SpringIoc容器内存在指定Class的条件
@@ -135,23 +146,36 @@ debug=true 观察
 @ConditionalOnSingleCandidate：当指定Bean在SpringIoc容器内只有一个，或者虽然有多个但是指定首选的Bean
 @ConditionalOnWebApplication：当前项目是Web项目的条件
      -> OnWebApplicationCondition 
-     HttpEncodingAutoConfiguration
+     
 
-springboot工作机制  //todo:
-springboot-starter  //todo:
+EnableAutoConfiguration	
+	AutoConfigurationPackages				
+	AutoConfigurationImportSelector					
+		ConditionEvaluationReportAutoConfigurationImportListener.onAutoConfigurationImportEvent
+		
+		ConfigurationClassPostProcessor-> processConfigBeanDefinitions
+		ConfigurationClassBeanDefinitionReader.loadBeanDefinitions
 
-|注解|	作用|
-|-----------|-----------|
-|@SpringBootApplication|	SpringBoot的核心注解，主要作用是开启自动配置。|
-|@SpringBootApplication|@SpringBootApplication=@ComponentScan+@Configuration+@EnableAutoConfiguration|
-|@SpringBootApplication|关闭特定的自动配置：@SpringBootApplication注解的exclude参数。<br>例如：@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class} )|
-|@EnableAutoConfiguration|让springboot根据类路径中的jar包依赖为当前项目进行自动配置。|
-|@ImportResource|	加载xml配置。<br>例如：@ImportResource({"classpath:some-context.xml","classpath:another-context.xml"})|
-|@ConfigurationProperties|	将properties属性和一个bean及其属性关联。   写在bean里面。<br>例如：@ConfigurationProperties(prefix = "author" , location = "{classpath:config/author.properties}" )|      
+SpringApplication执行流程 -> SpringApplicationRunListener
+1. 收集各种条件和回调接口,ApplicationContextInitializer,ApplicationListener
+    通告started
+2.  创建并准备 Environment
+    通告 environmentPrepared
+3. 创建并初始化 ApplicationContext,例如设置Environment和加载设置
+    通告contextPrepared
+    通告contextLoaded
+4. refresh ApplicationContext 完成启动
+    执行 CommandLineRunner
+    通告finished
+            
+
+自定义starter
+springboot-starter
+
+springboot + dubbo  //todo:
 
 #### SpringBoot源码浅析  //todo:
 
-springboot + dubbo  //todo:
      
 #### 推荐学习资源
    《 JavaEE开发的颠覆者 Spring Boot实战 》
