@@ -62,12 +62,18 @@ Boot所实现的功能超出了该任务的描述,开发人员不仅不再需要
 >9. SpringApplication.setDefaultProperties 声明的默认属性
       
         见 spring-boot-config
-        springboot-dubbo
-        springboot-es
+        springboot-dubbo //todo:
+        springboot-es //todo:
      3) Spring Boot使部署变简单
         jar + Docker部署  //todo:
-     4) Spring Boot使监控变简单
-         //todo:
+     4) [Spring Boot使监控变简单](http://rensanning.iteye.com/blog/2363526)
+         应用配置类
+        /configprops /autoconfig /beans /env /info /mappings
+         度量指标类
+         /dump /health
+         操作控制类
+         /shutdown
+         
 
 #### SpringBoot常用注解
 
@@ -129,4 +135,11 @@ springboot + dubbo  //todo:
  
   [spring-boot-in-action-源码](https://github.com/habuma/sbia-samples)
 
-  [SpringBoot参考指南](https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/)     
+  [SpringBoot参考指南](https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/)
+  
+  [spring-boot官方源码](https://github.com/spring-projects/spring-boot)
+  
+  
+  [xml注解混合配置](https://blog.csdn.net/lrcoop/article/details/78669613)
+  
+  [banner网站](http://patorjk.com/software/taag/)     

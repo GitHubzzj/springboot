@@ -10,6 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 // Spring Boot 应用的标识
 @SpringBootApplication
+
+//@SpringBootConfiguration
+//@EnableAutoConfiguration
+//@ComponentScan(excludeFilters = {
+//        @ComponentScan.Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+//        @ComponentScan.Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
 public class Application {
 
     public static void main(String[] args) {
