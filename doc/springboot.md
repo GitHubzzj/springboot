@@ -34,7 +34,8 @@ Boot所实现的功能超出了该任务的描述,开发人员不仅不再需要
      3) 外部化配置,使用 properties,YAML文件,环境变量,命令行参数等配置参数
 3. 起步依赖：告诉Spring Boot需要什么功能， 它就能引入需要的依赖库
     
-    1) 提供约定的starter POM来简化Maven配置(约定优先于配置)，让Maven的配置变得简单.如:spring-boot-starter-web
+    1) 提供约定的starter POM来简化Maven配置(约定优先于配置)，让Maven的配置变得简单.如:spring-boot-starter-web,spring-boot-starter-*
+        
     
 4. [Actuator](https://www.jianshu.com/p/481134c3fab7)：让你能够深入运行中的Spring Boot应用程序，一探Spring Boot程序的内部信息。
      
@@ -52,6 +53,7 @@ Boot所实现的功能超出了该任务的描述,开发人员不仅不再需要
      
 >属性优先级排列：
 >1. 命令行参数
+    java -jar springboot-helloworld-0.0.1-SNAPSHOT.jar --server.port=8088
 >2. java:comp/env 里的 JNDI 属性
 >3. JVM 系统属性
 >4. 操作系统环境变量
@@ -81,8 +83,9 @@ Boot所实现的功能超出了该任务的描述,开发人员不仅不再需要
 
 组合注解:
 
-@Import原理 //todo:
-
+@Import原理 
+https://www.cnblogs.com/davidwang456/p/6245635.html?utm_source=itdadao&utm_medium=referral
+ConfigurationClassParser.doProcessConfigurationClass
 ---
 
 @Enable*注解的工作原理:
@@ -107,8 +110,33 @@ WebApplicationInitializer ->  web.xml
 HTTP长连接 http://ju.outofmemory.cn/entry/28814     //todo:
 
 
-springboot运行原理 颠覆者  //todo:
+springboot运行原理 颠覆者  
+包名:
+spring-boot-autoconfigure-xx.RELEASE.jar
+debug=true 观察
+@EnableAutoConfiguration 
+    -> AutoConfigurationImportSelector 
+    -> getCandidateConfigurations 读取
+    -> SpringFactoriesLoader.loadFactoryNames
+    ->  FACTORIES_RESOURCE_LOCATION = "META-INF/spring.factories" 该文件里面有类完整名的配置
+    
+    
 @ConditionOnxxx
+@ConditionalOnBean：当SpringIoc容器内存在指定Bean的条件
+@ConditionalOnClass：当SpringIoc容器内存在指定Class的条件
+@ConditionalOnExpression：基于SpEL表达式作为判断条件
+@ConditionalOnJava：基于JVM版本作为判断条件
+@ConditionalOnJndi：在JNDI存在时查找指定的位置
+@ConditionalOnMissingBean：当SpringIoc容器内不存在指定Bean的条件
+@ConditionalOnMissingClass：当SpringIoc容器内不存在指定Class的条件
+@ConditionalOnNotWebApplication：当前项目不是Web项目的条件
+@ConditionalOnProperty：指定的属性是否有指定的值
+@ConditionalOnResource：类路径是否有指定的值
+@ConditionalOnSingleCandidate：当指定Bean在SpringIoc容器内只有一个，或者虽然有多个但是指定首选的Bean
+@ConditionalOnWebApplication：当前项目是Web项目的条件
+     -> OnWebApplicationCondition 
+     HttpEncodingAutoConfiguration
+
 springboot工作机制  //todo:
 springboot-starter  //todo:
 

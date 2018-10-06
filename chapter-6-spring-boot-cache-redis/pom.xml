@@ -28,18 +28,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.0.0.BUILD-SNAPSHOT</version>
         </dependency>
 
         <!-- 模板引擎 Thymeleaf 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>2.0.0.BUILD-SNAPSHOT</version>
         </dependency>
 
         <!-- Spring Data JPA 依赖 :: 数据持久层框架 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>2.0.0.BUILD-SNAPSHOT</version>
         </dependency>
 
         <!-- h2 数据源依赖 -->
@@ -53,18 +56,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
+            <version>2.0.0.BUILD-SNAPSHOT</version>
         </dependency>
 
         <!-- Redis 数据源依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-redis</artifactId>
+            <version>1.4.7.RELEASE</version>
         </dependency>
 
         <!-- 测试依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>2.0.0.BUILD-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
 
